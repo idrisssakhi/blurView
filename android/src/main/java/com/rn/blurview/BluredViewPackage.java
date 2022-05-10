@@ -28,6 +28,6 @@ public class BluredViewPackage implements ReactPackage {
     @Nonnull
     public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
         return Collections.<ViewManager>singletonList(
-                new BluredViewManager());
+                new BlurViewManager());
     }
 }
