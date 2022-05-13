@@ -1,4 +1,4 @@
-# `@rn-id/blurview`
+# `rn-id-blurview`
 
 A component for UIVisualEffectView's blur effect on iOS, and [BlurView](https://github.com/Dimezis/BlurView) on Android.<br>
 
@@ -6,7 +6,7 @@ A component for UIVisualEffectView's blur effect on iOS, and [BlurView](https://
 
 ### Content
 
-- [`@rn-id/blurview`](#rn-idblurview)
+- [`rn-id-blurview`](#rn-id-blurview)
     - [Content](#content)
     - [Installation](#installation)
     - [BlurView](#blurview)
@@ -19,19 +19,19 @@ A component for UIVisualEffectView's blur effect on iOS, and [BlurView](https://
 1. Install the library using either Yarn:
 
 ```
-yarn add @rn-id/blurview
+yarn add rn-id-blurview
 ```
 
 or npm:
 
 ```
-npm install --save @rn-id/blurview
+npm install --save rn-id-blurview
 ```
 
 2. Link your native dependencies:
 
 ```
-react-native link @rn-id/blurview
+react-native link rn-id-blurview
 ```
 
 3. (iOS only) Install to Xcode:
@@ -61,7 +61,7 @@ ext {
 5. Include the library in your code:
 
 ```javascript
-import { BlurView } from "@rn-id/blurview";
+import { BlurView } from "rn-id-blurview";
 ```
 
 6. Compile and have fun!
@@ -105,7 +105,7 @@ import { BlurView } from "@rn-id/blurview";
 ```javascript
 import React, { Component } from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import { BlurView } from "@rn-id/blurview";
+import { BlurView } from "rn-id-blurview";
 
 export default class Menu extends Component {
 

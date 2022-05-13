@@ -1,6 +1,6 @@
 {
-  "name": "@rn-id/blurview",
-  "version": "1.0.0",
+  "name": "rn-id-blurview",
+  "version": "1.0.1",
   "description": "React Native light Blured component",
   "scripts": {
     "android": "react-native run-android",
@@ -53,10 +53,11 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idrisssakhi/blurView.git"
+    "url": "git@github.com:idrisssakhi/blurView.git"
   },
   "bugs": {
     "url": "https://github.com/idrisssakhi/blurView/issues"
   },
-  "homepage": "https://github.com/idrisssakhi/blurView#readme"
+  "homepage": "https://github.com/idrisssakhi/blurView#readme",
+  "publishConfig": { "@idrisssakhi:registry": "https://npm.pkg.github.com" }
 }
