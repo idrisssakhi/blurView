@@ -9,7 +9,6 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
-  "dependencies": {},
   "devDependencies": {
     "react": "17.0.2",
     "react-native": "0.68.1",
@@ -46,5 +45,15 @@
       "json",
       "node"
     ]
-  }
+  },
+  "types": "./index.d.ts",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idrisssakhi/blurView.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idrisssakhi/blurView/issues"
+  },
+  "homepage": "https://github.com/idrisssakhi/blurView#readme"
 }
