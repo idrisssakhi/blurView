@@ -24,7 +24,7 @@
 
 + (instancetype)effectWithStyle:(UIBlurEffectStyle)style andBlurAmount:(NSNumber*)blurAmount
 {
-  BlurEffect *effect = (BlurEffectWithAmount*)[self effectWithStyle:style];
+  BlurEffect *effect = (BlurEffect*)[self effectWithStyle:style];
   effect.blurAmount = blurAmount;
   return effect;
 }
