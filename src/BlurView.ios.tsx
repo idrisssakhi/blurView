@@ -1,4 +1,4 @@
-import {requireNativeComponent, StyleSheet, ViewProps} from 'react-native';
+import { requireNativeComponent, StyleSheet } from 'react-native';
 import { IosProps } from './types';
 
 const BlurView = (props: IosProps) => {
@@ -16,6 +16,6 @@ BlurView.defaultProps = {
   blurAmount: 10,
 };
 
-const NativeBlurView = requireNativeComponent('BlurView', BlurView);
+const NativeBlurView = requireNativeComponent('BlurView');
 
 module.exports = BlurView;

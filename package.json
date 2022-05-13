@@ -31,7 +31,10 @@
     "@types/react": "17"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "blured",
+    "blurView",
+    "blur"
   ],
   "author": "Idris Sakhi <idrisssakhi@gmail.com> (https://github.com/idrisssakhi)",
   "license": "MIT",
