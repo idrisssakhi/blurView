@@ -1,10 +1,7 @@
-import React, {Component, PropsWithChildren, useCallback, useEffect, useMemo} from 'react';
-import PropTypes from 'prop-types';
+import React, { PropsWithChildren, useEffect, useMemo } from 'react';
 import {
-  View,
   requireNativeComponent,
   DeviceEventEmitter,
-  ViewPropTypes,
   StyleSheet,
 } from 'react-native';
 import { AndroidProps } from './types';
@@ -86,6 +83,6 @@ BlurView.defaultProps = {
   blurAmount: 10,
 };
 
-const NativeBlurView = requireNativeComponent('BlurView', BlurView);
+const NativeBlurView = requireNativeComponent('BlurView');
 
 module.exports = BlurView;
