@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.react.uimanager.ViewGroupManager;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
@@ -34,11 +33,12 @@ class BlurViewManager extends ViewGroupManager<BlurView> {
         View decorView = Objects.requireNonNull(ctx.getCurrentActivity()).getWindow().getDecorView();
         ViewGroup rootView = decorView.findViewById(android.R.id.content);
         Drawable windowBackground = decorView.getBackground();
+
         blurView.setupWith(rootView)
                 .setFrameClearDrawable(windowBackground)
                 .setBlurAlgorithm(new RenderScriptBlur(ctx))
                 .setBlurRadius(defaultRadius)
-                .setHasFixedTransformationMatrix(false);
+                .setBlurAutoUpdate(true);
         return blurView;
     }
 
