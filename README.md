@@ -11,6 +11,7 @@ A component for UIVisualEffectView's blur effect on iOS, and [BlurView](https://
     - [Installation](#installation)
     - [BlurView](#blurview)
     - [Android](#android)
+    - [Workaround for android](#workaround-for-android)
     - [Troubleshooting](#troubleshooting)
     - [Questions?](#questions)
 
@@ -162,7 +163,18 @@ In addition to `blurType` and `blurAmount`, Android has some extra props that ca
 - `blurRadius` (Number - between 0 and 25) - Manually adjust the blur radius. (Default: matches iOS blurAmount)
 - `downsampleFactor` (Number - between 0 and 25) - Scales down the image before blurring (Default: matches iOS blurAmount)
 - `overlayColor` (Color) - Set a custom overlay color (Default color based on iOS blurType)
-
+### Workaround for android
+```javascript
+  <View style={{backgroundColor: preferedColorForAndroidONParent}}>
+    <BlurView
+      blurType="light"
+      blurAmount={15}
+      style={StyleSheet.absoluteFill}
+      key={isIOS ? 'blur' : Math.random().toString()}
+      overlayColor={Platform.select({ android: Color.Transparent, ios: Color.White70 })}
+    />
+  </View>
+```
 ### Troubleshooting
 
 On older instances of react-native, BlurView package does not get added into the MainActivity/MainApplication classes where you would see `Warning: Native component for 'BlurView' does not exist` in RN YellowBox or console.

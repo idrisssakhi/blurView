@@ -1,6 +1,6 @@
 {
   "name": "rn-id-blurview",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "React Native light Blured component",
   "scripts": {
     "android": "react-native run-android",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "react": "17.0.2",
-    "react-native": "0.68.1",
+    "react-native": "0.68.2",
     "@babel/core": "7.12.9",
     "@babel/runtime": "7.12.5",
     "@react-native-community/eslint-config": "2.0.0",
@@ -34,7 +34,10 @@
     "react-native",
     "blured",
     "blurView",
-    "blur"
+    "blur",
+    "native blur",
+    "react-native-blur",
+    "blur-view"
   ],
   "author": "Idris Sakhi <idrisssakhi@gmail.com> (https://github.com/idrisssakhi)",
   "license": "MIT",

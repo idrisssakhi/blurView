@@ -64,6 +64,7 @@ const BlurView = (props: PropsWithChildren<AndroidProps>) => {
 
     return (
       <NativeBlurView
+        {...props}
         blurRadius={blurRadius}
         downsampleFactor={downsampleFactor}
         overlayColor={overlayColor}
