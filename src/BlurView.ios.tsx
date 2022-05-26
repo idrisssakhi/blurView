@@ -1,3 +1,4 @@
+import React from 'react'
 import { requireNativeComponent, StyleSheet } from 'react-native';
 import { IosProps } from './types';
 
