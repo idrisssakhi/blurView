@@ -1,0 +1,16 @@
+module.exports = {
+  plugins: ['prettier-plugin-jsdoc'],
+  tsdoc: true,
+  bracketSpacing: true,
+  jsxSingleQuote: false,
+  singleQuote: true,
+  endOfLine: 'lf',
+  tabWidth: 2,
+  printWidth: 120,
+  arrowParens: 'always',
+  embeddedLanguageFormatting: 'auto',
+  htmlWhitespaceSensitivity: 'css',
+  proseWrap: 'preserve',
+  semi: true,
+  trailingComma: 'es5',
+};

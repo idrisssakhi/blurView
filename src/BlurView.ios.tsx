@@ -1,22 +1,22 @@
 import React from 'react'
 import { requireNativeComponent, StyleSheet } from 'react-native';
-import { IosProps } from './types';
+import { styles } from './BlurView.style';
+import type { BlurViewProperties } from './types';
 
-const BlurView = (props: IosProps) => {
+export const BlurView = (props: BlurViewProperties) => {
   return (
-    <NativeBlurView style={[styles.transparent, props?.style]} {...props} />
+    <NativeBlurView style={StyleSheet.compose(styles.transparent, props?.style)} {...props} />
   );
 };
-
-const styles = StyleSheet.create({
-  transparent: {backgroundColor: 'transparent'},
-});
 
 BlurView.defaultProps = {
   blurType: 'dark',
   blurAmount: 10,
 };
 
-const NativeBlurView = requireNativeComponent('BlurView');
-
-module.exports = BlurView;
+// requireNativeComponent automatically resolves 'BlurView' to 'BlurViewManager'
+const NativeBlurView = requireNativeComponent<BlurViewProperties>(
+  'BlurView',
+  // @ts-expect-error because the type declarations are kinda wrong, no?
+  BlurView,
+);

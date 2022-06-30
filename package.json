@@ -1,17 +1,46 @@
+
 {
   "name": "rn-id-blurview",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "React Native light Blured component",
+  "main": "lib/commonjs/index",
+  "module": "lib/module/index",
+  "types": "lib/typescript/index.d.ts",
+  "react-native": "src/index.ts",
+  "source": "src/index",
+  "files": [
+    "src/",
+    "lib/",
+    "android/",
+    "ios/",
+    "rn-id-blurview.podspec",
+    "README.md"
+  ],
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "prepare": "bob build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typescript": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "lint-ci": "yarn lint -f ./node_modules/@firmnav/eslint-github-actions-formatter/dist/formatter.js",
+    "build": "bob build",
+    "check-js": "yarn lint --fix && yarn typescript",
+    "bootstrap": "yarn && cd example && yarn && yarn setup && yarn pods"
   },
+  "keywords": [
+    "react-native",
+    "blured",
+    "blurView",
+    "blur",
+    "native blur",
+    "react-native-blur",
+    "blur-view"
+  ],
+  "author": "Idris Sakhi <idrisssakhi@gmail.com> (https://github.com/idrisssakhi)",
+  "license": "MIT",
   "devDependencies": {
-    "react": "17.0.2",
-    "react-native": "0.68.2",
+    "react-native-builder-bob": "0.18.2",
+    "react-native": "^0.66.0",
+    "react": "^17.0.2",
     "@babel/core": "7.12.9",
     "@babel/runtime": "7.12.5",
     "@react-native-community/eslint-config": "2.0.0",
@@ -27,33 +56,24 @@
     "react-test-renderer": "17.0.2",
     "typescript": "4.4.4"
   },
-  "resolutions": {
-    "@types/react": "17"
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
   },
-  "keywords": [
-    "react-native",
-    "blured",
-    "blurView",
-    "blur",
-    "native blur",
-    "react-native-blur",
-    "blur-view"
-  ],
-  "author": "Idris Sakhi <idrisssakhi@gmail.com> (https://github.com/idrisssakhi)",
-  "license": "MIT",
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.json"
+        }
+      ]
     ]
   },
-  "types": "./index.d.ts",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:idrisssakhi/blurView.git"
@@ -62,5 +82,7 @@
     "url": "https://github.com/idrisssakhi/blurView/issues"
   },
   "homepage": "https://github.com/idrisssakhi/blurView#readme",
-  "publishConfig": { "@idrisssakhi:registry": "https://npm.pkg.github.com" }
+  "publishConfig": {
+    "@idrisssakhi:registry": "https://npm.pkg.github.com"
+  }
 }

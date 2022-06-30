@@ -3,8 +3,9 @@ import {
   requireNativeComponent,
   DeviceEventEmitter,
   StyleSheet,
+  ViewProps,
 } from 'react-native';
-import { AndroidProps } from './types';
+import { styles } from './BlurView.style';
 
 const OVERLAY_COLORS = {
   light: 'rgba(255, 255, 255, 0.2)',
@@ -12,7 +13,22 @@ const OVERLAY_COLORS = {
   dark: 'rgba(16, 12, 12, 0.64)',
 };
 
-const BlurView = (props: PropsWithChildren<AndroidProps>) => {
+type AndroidBlurType =
+  | 'dark'
+  | 'light'
+  | 'xlight';
+
+interface AndroidProps extends ViewProps {
+  blurType: AndroidBlurType;
+  blurAmount: number;
+  downsampleFactor: number;
+  blurRadius?: number;
+  overlayColor?: string;
+}
+
+export const BlurView = (props: PropsWithChildren<AndroidProps>) => {
+
+  const blurType: AndroidBlurType = ['light', 'xlight', 'dark'].includes(props.blurType) ? props.blurType as AndroidBlurType : 'dark';
 
   useEffect(() => {
     DeviceEventEmitter.addListener('ReactNativeBlurError', (message) => {
@@ -27,7 +43,7 @@ const BlurView = (props: PropsWithChildren<AndroidProps>) => {
     if (props.overlayColor) {
         return props.overlayColor;
       }
-      return OVERLAY_COLORS[props.blurType] || OVERLAY_COLORS.dark;
+      return OVERLAY_COLORS[blurType];
   }, []);
 
   const blurRadius = useMemo(() => {
@@ -52,15 +68,15 @@ const BlurView = (props: PropsWithChildren<AndroidProps>) => {
     return equivalentBlurRadius;
     }, []);
 
-  const downsampleFactor = useMemo(() => {
+  const downsampleFactor: number = useMemo(() => {
     const {downsampleFactor, blurRadius} = props;
-    if (downsampleFactor != null) {
+    if (downsampleFactor && downsampleFactor !== null) {
       return downsampleFactor;
     }
-    return blurRadius;
+    return blurRadius ?? 8;
   }, []);
 
-
+  const {style} = props;
 
     return (
       <NativeBlurView
@@ -69,21 +85,20 @@ const BlurView = (props: PropsWithChildren<AndroidProps>) => {
         downsampleFactor={downsampleFactor}
         overlayColor={overlayColor}
         pointerEvents="none"
-        style={[styles.transparent, props.style]}>
+        style={StyleSheet.compose(styles.transparent, style)}>
         {props.children}
       </NativeBlurView>
     );
 }
-
-const styles = StyleSheet.create({
-  transparent: {backgroundColor: 'transparent'},
-});
 
 BlurView.defaultProps = {
   blurType: 'dark',
   blurAmount: 10,
 };
 
-const NativeBlurView = requireNativeComponent('BlurView');
-
-module.exports = BlurView;
+// requireNativeComponent automatically resolves 'BlurView' to 'BlurViewManager'
+const NativeBlurView = requireNativeComponent<AndroidProps>(
+  'BlurView',
+  // @ts-expect-error because the type declarations are kinda wrong, no?
+  BlurView,
+);

@@ -1,6 +1,6 @@
-import { StyleProp, ViewProps, ViewStyle } from "react-native";
+import type { StyleProp, ViewStyle } from "react-native";
 
-export type IosBlurType =
+export type BlurType =
   | 'dark'
   | 'light'
   | 'xlight'
@@ -23,30 +23,12 @@ export type IosBlurType =
   | 'thinMaterialLight'
   | 'ultraThinMaterialLight';
 
-  export type AndroidBlurType =
-  | 'dark'
-  | 'light'
-  | 'xlight';
-
-export interface IosProps extends ViewProps {
-  blurType: IosBlurType;
-  blurAmount: number;
-}
-
-export interface AndroidProps extends ViewProps {
-    blurType: AndroidBlurType;
-    blurAmount: number;
-    downsampleFactor: number;
-    blurRadius?: number;
-    overlayColor?: string;
-}
-
 export interface BlurViewProperties {
-    blurType?: IosBlurType;
-    blurAmount?: number // 0 - 100
-    reducedTransparencyFallbackColor?: string
-    style?: StyleProp<ViewStyle>
-    blurRadius?: number
-    downsampleFactor?: number
-    overlayColor?: string
-  }
+  blurType: BlurType;
+  blurAmount: number; // 0 - 100
+  blurRadius: number;
+  reducedTransparencyFallbackColor?: string;
+  style?: StyleProp<ViewStyle>;
+  downsampleFactor?: number;
+  overlayColor?: string;
+}
