@@ -59,3 +59,13 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+
+# Bob generated files
+lib/
+
+# we only use yarn
+package-lock.json
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx/

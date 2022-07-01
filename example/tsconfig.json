@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "paths": {
+      "rn-id-blurview": ["../src/index"]
+    }
+  },
+  "include": ["src", "index.js"],
+  "exclude": ["node_modules"]
+}
