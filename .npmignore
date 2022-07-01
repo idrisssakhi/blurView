@@ -62,5 +62,5 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-#Example
-example/
+#Example project
+example/**/*
