@@ -4,8 +4,8 @@ import {
   DeviceEventEmitter,
   StyleSheet,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
-import { styles } from './BlurView.style';
 
 const OVERLAY_COLORS = {
   light: 'rgba(255, 255, 255, 0.2)',
@@ -26,7 +26,7 @@ interface AndroidProps extends ViewProps {
   overlayColor?: string;
 }
 
-export const BlurView = ({ blurRadius, blurAmount, blurType, overlayColor, downsampleFactor, ...nativeProps}: PropsWithChildren<AndroidProps>) => {
+const BlurView = ({ blurRadius, blurAmount, blurType, overlayColor, downsampleFactor, ...nativeProps}: PropsWithChildren<AndroidProps>) => {
   const calclatedBlurType: AndroidBlurType = ['light', 'xlight', 'dark'].includes(blurType) ? blurType as AndroidBlurType : 'dark';
 
   useEffect(() => {
@@ -90,14 +90,16 @@ export const BlurView = ({ blurRadius, blurAmount, blurType, overlayColor, downs
   );
 }
 
+const styles = StyleSheet.create<{transparent: ViewStyle}>({
+  transparent: {backgroundColor: 'transparent'},
+});
+
 BlurView.defaultProps = {
   blurType: 'dark',
   blurAmount: 10,
 };
 
 // requireNativeComponent automatically resolves 'BlurView' to 'BlurViewManager'
-const NativeBlurView = requireNativeComponent<AndroidProps>(
-  'BlurView',
-  // @ts-expect-error because the type declarations are kinda wrong, no?
-  BlurView,
-);
+const NativeBlurView = requireNativeComponent<AndroidProps>('BlurView');
+
+export default BlurView;
