@@ -1,7 +1,7 @@
 
 {
   "name": "rn-id-blurview",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "React Native light Blured component",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
