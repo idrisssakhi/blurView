@@ -1,4 +1,3 @@
-
 package com.blurview;
 
 import android.graphics.drawable.Drawable;
@@ -13,11 +12,13 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 
+import eightbitlab.com.blurview.BlurAlgorithm;
 import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderEffectBlur;
 import eightbitlab.com.blurview.RenderScriptBlur;
 
 @SuppressWarnings("unused")
-class BlurViewManager extends ViewGroupManager<BlurView> {
+class BlurViewModule extends ViewGroupManager<BlurView> {
     private static final String REACT_CLASS = "BlurView";
 
     private static final int defaultRadius = 10;
@@ -35,9 +36,12 @@ class BlurViewManager extends ViewGroupManager<BlurView> {
         ViewGroup rootView = decorView.findViewById(android.R.id.content);
         Drawable windowBackground = decorView.getBackground();
 
-        blurView.setupWith(rootView)
+        BlurAlgorithm blurAlgorithm = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S
+                ? new RenderEffectBlur()
+                : new RenderScriptBlur(ctx);
+
+        blurView.setupWith(rootView, blurAlgorithm)
                 .setFrameClearDrawable(windowBackground)
-                .setBlurAlgorithm(new RenderScriptBlur(ctx))
                 .setBlurRadius(defaultRadius)
                 .setBlurAutoUpdate(true);
         return blurView;
@@ -45,8 +49,13 @@ class BlurViewManager extends ViewGroupManager<BlurView> {
 
     @ReactProp(name = "blurRadius", defaultInt = defaultRadius)
     public void setRadius(BlurView view, int radius) {
-        view.setBlurRadius(radius);
-        view.invalidate();
+        if (radius == 0) {
+            view.setBlurEnabled(false);
+        } else {
+            view.setBlurEnabled(true);
+            view.setBlurRadius(radius);
+            view.invalidate();
+        }
     }
 
     @ReactProp(name = "overlayColor", customType = "Color")
@@ -57,6 +66,5 @@ class BlurViewManager extends ViewGroupManager<BlurView> {
 
     @ReactProp(name = "downsampleFactor", defaultInt = defaultSampling)
     public void setDownsampleFactor(BlurView view, int factor) {
-
     }
 }

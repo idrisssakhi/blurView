@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/slider": "^4.2.4",
     "react": "18.0.0",
     "react-native": "0.69.1"
   },

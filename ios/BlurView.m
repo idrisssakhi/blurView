@@ -124,6 +124,8 @@
 
 - (void)updateBlurEffect
 {
+  // Set to nil before applicating chnages in order to animate blur.
+  self.blurEffectView.effect = nil;
   UIBlurEffectStyle style = [self blurEffectStyle];
   self.blurEffect = [BlurEffect effectWithStyle:style andBlurAmount:self.blurAmount];
   self.blurEffectView.effect = self.blurEffect;

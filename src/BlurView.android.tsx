@@ -26,9 +26,8 @@ interface AndroidProps extends ViewProps {
   overlayColor?: string;
 }
 
-export const BlurView = (props: PropsWithChildren<AndroidProps>) => {
-
-  const blurType: AndroidBlurType = ['light', 'xlight', 'dark'].includes(props.blurType) ? props.blurType as AndroidBlurType : 'dark';
+export const BlurView = ({ blurRadius, blurAmount, blurType, overlayColor, downsampleFactor, ...nativeProps}: PropsWithChildren<AndroidProps>) => {
+  const calclatedBlurType: AndroidBlurType = ['light', 'xlight', 'dark'].includes(blurType) ? blurType as AndroidBlurType : 'dark';
 
   useEffect(() => {
     DeviceEventEmitter.addListener('ReactNativeBlurError', (message) => {
@@ -39,15 +38,14 @@ export const BlurView = (props: PropsWithChildren<AndroidProps>) => {
       }
   }, []);
 
-  const overlayColor = useMemo(() => {
-    if (props.overlayColor) {
-        return props.overlayColor;
-      }
-      return OVERLAY_COLORS[blurType];
-  }, []);
+  const calculatedOverlayColor = useMemo(() => {
+    if (overlayColor) {
+      return overlayColor;
+    }
+      return OVERLAY_COLORS[calclatedBlurType];
+  }, [overlayColor, calclatedBlurType]);
 
-  const blurRadius = useMemo(() => {
-    const {blurRadius, blurAmount} = props;
+  const calculatedBlurRadius = useMemo(() => {
 
     if (blurRadius != null) {
       if (blurRadius > 25) {
@@ -66,29 +64,30 @@ export const BlurView = (props: PropsWithChildren<AndroidProps>) => {
       return 25;
     }
     return equivalentBlurRadius;
-    }, []);
+    }, [blurRadius, blurAmount]);
 
-  const downsampleFactor: number = useMemo(() => {
-    const {downsampleFactor, blurRadius} = props;
+  const calculatedDownsampleFactor: number = useMemo(() => {
     if (downsampleFactor && downsampleFactor !== null) {
       return downsampleFactor;
     }
     return blurRadius ?? 8;
-  }, []);
+  }, [downsampleFactor, blurRadius]);
 
-  const {style} = props;
+  const {style} = nativeProps;
 
-    return (
-      <NativeBlurView
-        {...props}
-        blurRadius={blurRadius}
-        downsampleFactor={downsampleFactor}
-        overlayColor={overlayColor}
-        pointerEvents="none"
-        style={StyleSheet.compose(styles.transparent, style)}>
-        {props.children}
-      </NativeBlurView>
-    );
+  return (
+    <NativeBlurView
+      blurType={calclatedBlurType}
+      blurAmount={calculatedBlurRadius}
+      blurRadius={calculatedBlurRadius}
+      downsampleFactor={calculatedDownsampleFactor}
+      overlayColor={calculatedOverlayColor}
+      pointerEvents="none"
+      style={StyleSheet.compose(styles.transparent, style)}
+      {...nativeProps}>
+      {nativeProps.children}
+    </NativeBlurView>
+  );
 }
 
 BlurView.defaultProps = {

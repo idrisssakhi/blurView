@@ -32,6 +32,10 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
@@ -41,5 +45,5 @@ repositories {
 
 dependencies {
     api 'com.facebook.react:react-native:+'
-    implementation 'com.github.Dimezis:BlurView:version-2.0.0'
+    implementation 'com.github.Dimezis:BlurView:version-2.0.2'
 }

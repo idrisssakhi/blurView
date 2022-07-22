@@ -1,4 +1,3 @@
-
 package com.blurview;
 
 import com.facebook.react.ReactPackage;
@@ -28,7 +27,7 @@ public class BlurViewPackage implements ReactPackage {
     @Override
     @Nonnull
     public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
-        return Collections.<ViewManager>singletonList(
-                new BlurViewManager());
+        return Collections.singletonList(
+                new BlurViewModule());
     }
 }
