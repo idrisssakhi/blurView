@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -16,11 +15,14 @@ import {
   Header,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Slider from '@react-native-community/slider';
+
 import {BlurView, BlurType} from 'rn-id-blurview';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [blurType, setBlurType] = useState<BlurType>("light");
+  const [blurAmount, setBlurAmount] = useState(10);
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -36,7 +38,7 @@ const App = () => {
         <Header />
         <BlurView
           blurType={blurType}
-          blurAmount={10}
+          blurAmount={blurAmount}
           style={StyleSheet.absoluteFill}
           key={'blur'}
         />
@@ -54,29 +56,20 @@ const App = () => {
             <TouchableOpacity style={buttonStyle} onPress={() => setBlurType('xlight')}>
               <Text>xlight</Text>
             </TouchableOpacity>
+            <Slider
+              style={{width: '100%', height: 40}}
+              minimumValue={0}
+              maximumValue={25}
+              onValueChange={setBlurAmount}
+              step={1}
+              value={blurAmount}
+              minimumTrackTintColor="#0085f2"
+              maximumTrackTintColor="#000000"
+            />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
